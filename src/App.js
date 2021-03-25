@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {useSelector, useDispatch} from 'react-redux';
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
     table: {
       minWidth: 650,
     },
+  });
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => {
+    return state.counter;
   });
 
   const [invoice, setInvoiceList] = useState([]);
@@ -62,6 +67,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <p>{counter}</p>
+      <button onClick={()=>{
+        dispatch({type:'increment'})
+      }}>Increment</button>
+      <button onClick={()=>{
+        dispatch({type:'decrement'})
+      }}>Decrement</button>
       <TableContainer component={Paper}>
       <Table className={useStyles().table}>
         <TableHead>
